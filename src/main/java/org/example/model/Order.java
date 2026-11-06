@@ -32,8 +32,11 @@ public class Order {
     }
 
     public void markAsPaid(){
-        // TODO: validate order is not empty
-        this.status = OrderStatus.PAID;
+        if(items.isEmpty() == true){
+            throw new IllegalStateException("Order is empty!");
+        }else {
+            this.status = OrderStatus.PAID;
+        }
     }
 
     public void applyDiscount(Discount discount){
