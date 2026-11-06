@@ -15,7 +15,7 @@ public class GiftCardPayment extends PaymentMethod{
     @Override
     public PaymentResult processPayment(double amount){
         if(amount > balance){
-            return new PaymentResult(false, "Insufficient funds on the gift card@")
+            return new PaymentResult(false, "Insufficient funds on the gift card@");
         }
         balance -= amount;
         return new PaymentResult(true, "Paid " + amount + " using gift card");
