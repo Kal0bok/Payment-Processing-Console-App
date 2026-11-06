@@ -16,8 +16,11 @@ public class Order {
     }
 
     public void addItem(OrderItem item){
-        // TODO: prevent adding items if order is already paid
-        items.add(item);
+        if(isPaid() == true) {
+            throw new IllegalStateException("Cannot add items to a paid order!");
+        }else{
+            items.add(item);
+        }
     }
 
     public double calculateTotal(){
