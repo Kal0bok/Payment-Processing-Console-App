@@ -71,8 +71,11 @@ public class Order {
             return this;
         }
         public Order build(){
-            // TODO: validate customerName
-            return new Order(this);
+            if(customerName == null || customerName.trim().isEmpty()){
+                throw new IllegalArgumentException("Customer name cannot be null or empty");
+            }else{
+                return new Order(this);
+            }
         }
     }
 }
