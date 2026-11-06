@@ -16,18 +16,27 @@ public class Order {
     }
 
     public void addItem(OrderItem item){
-        // TODO: prevent adding items if order is already paid
-        items.add(item);
+        if(isPaid() == true) {
+            throw new IllegalStateException("Cannot add items to a paid order!");
+        }else{
+            items.add(item);
+        }
     }
 
     public double calculateTotal(){
-        // TODO: calculate total from all order items (including discounts)
-        return 0;
+        double subtotal = 0;
+        for(OrderItem item : items){
+            subtotal += item.calculateTotal();
+        }
+        return discount.apply(subtotal);
     }
 
     public void markAsPaid(){
-        // TODO: validate order is not empty
-        this.status = OrderStatus.PAID;
+        if(items.isEmpty() == true){
+            throw new IllegalStateException("Order is empty!");
+        }else {
+            this.status = OrderStatus.PAID;
+        }
     }
 
     public void applyDiscount(Discount discount){
@@ -62,8 +71,11 @@ public class Order {
             return this;
         }
         public Order build(){
-            // TODO: validate customerName
-            return new Order(this);
+            if(customerName == null || customerName.trim().isEmpty()){
+                throw new IllegalArgumentException("Customer name cannot be null or empty");
+            }else{
+                return new Order(this);
+            }
         }
     }
 }
