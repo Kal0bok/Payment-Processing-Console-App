@@ -16,7 +16,7 @@ public class Order {
     }
 
     public void addItem(OrderItem item){
-        if(isPaid() == true) {
+        if(isPaid()) {
             throw new IllegalStateException("Cannot add items to a paid order!");
         }else{
             items.add(item);
