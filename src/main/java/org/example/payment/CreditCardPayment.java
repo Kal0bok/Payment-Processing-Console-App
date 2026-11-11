@@ -19,7 +19,7 @@ public class CreditCardPayment extends PaymentMethod {
         }
 
         String cleanCardNumber = cardNumber.replaceAll("\\s+|-", "");
-        if (cleanCardNumber.length() != 16) {
+        if (!cleanCardNumber.matches("\\d{16}")) {
             return new PaymentResult(false, "Invalid card number length. Must be 16 digits.");
         }
 
